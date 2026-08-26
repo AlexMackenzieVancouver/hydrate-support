@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earshot Support</title>
+<style>
+  :root { --accent:#B4471F; --ink:#16181C; --muted:#5A5F68; --bg:#FBFAF6; --card:#fff; --rule:#E6E3DA; }
+  @media (prefers-color-scheme: dark) {
+    :root { --accent:#E0703F; --ink:#F2F1EC; --muted:#A7ADB6; --bg:#141518; --card:#1D1F24; --rule:#2C2F36; }
+  }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+         color:var(--ink); background:var(--bg); line-height:1.65; }
+  .wrap { max-width:720px; margin:0 auto; padding:48px 24px 72px; }
+  .card { background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:20px 24px; margin:18px 0; }
+  h1 { font-size:30px; margin:0 0 4px; }
+  h2 { font-size:19px; margin:0 0 8px; }
+  a { color:var(--accent); }
+  .muted { color:var(--muted); font-size:14px; }
+  ul { padding-left:20px; } li { margin:8px 0; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Earshot Support</h1>
+  <p class="muted">A notepad that listens. We read every message.</p>
+
+  <section class="card">
+    <h2>Contact</h2>
+    <p>Email <a href="mailto:support@lifescience.ca">support@lifescience.ca</a>.
+    We usually reply within 1–2 business days.</p>
+    <p class="muted">Because Earshot keeps everything on your device, we cannot
+    see your notes — so please describe what happened rather than assuming we
+    can look it up.</p>
+  </section>
+
+  <section class="card">
+    <h2>Common questions</h2>
+    <ul>
+      <li><strong>Notes came out as plain extraction instead of a proper
+      summary.</strong> The on-device AI model needs iPhone 15 Pro or newer and
+      Apple Intelligence turned on in Settings. On other iPhones, Earshot uses
+      plain extraction instead — accurate, just less fluent. It tells you when
+      that happens.</li>
+
+      <li><strong>Speakers aren't named.</strong> Tap any speaker label in the
+      transcript and give it a name. Earshot remembers that voice and names it
+      automatically in future conversations.</li>
+
+      <li><strong>A speaker was named wrong.</strong> Tap the label and correct
+      it. The fix applies to the whole conversation and to every future one.</li>
+
+      <li><strong>Action items didn't reach Reminders.</strong> Accept the items
+      first, then tap Send to Reminders. Check that Earshot has Reminders access
+      in Settings → Privacy &amp; Security → Reminders.</li>
+
+      <li><strong>Apple Watch capture hasn't appeared on my iPhone.</strong>
+      Open Earshot on your iPhone with the Watch nearby. Transfers resume
+      automatically after being out of range; the Watch shows how many captures
+      are still waiting and does not delete audio until the iPhone confirms it
+      arrived.</li>
+
+      <li><strong>The app stopped mid-recording.</strong> Reopen Earshot — the
+      audio is written to disk continuously, so an unfinished recording is
+      offered back to you at the top of the list.</li>
+
+      <li><strong>Restore purchases.</strong> Settings → Restore Purchases.</li>
+
+      <li><strong>Getting my notes out.</strong> Export to Markdown from any
+      note, or export everything from Settings. Export is never restricted by
+      plan.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>What's free</h2>
+    <p>Unlimited conversations, unlimited history, unlimited AI notes, speaker
+    names, Moments, the built-in templates, Reminders and Markdown delivery,
+    full export, and the Apple Watch app. Forever — not a trial, and not a
+    30-day window on your own past.</p>
+    <p class="muted">Pro adds reach: asking questions across your whole archive,
+    briefs before meetings, custom templates, and pushing notes to Calendar,
+    Mail, and your own tools. Nothing that works for free today will move behind
+    that paywall in a later release.</p>
+  </section>
+
+  <p class="muted"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
+</main>
+</body>
+</html>

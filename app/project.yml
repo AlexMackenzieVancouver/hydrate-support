@@ -1,0 +1,99 @@
+# XcodeGen spec. `brew install xcodegen && cd app && xcodegen generate`
+#
+# The project file is generated rather than committed so that merge conflicts
+# in .pbxproj cannot happen, and so the target/entitlement surface is reviewable
+# as a diff. Canon: P4-technical/RFC.md §2.
+
+name: Earshot
+options:
+  bundleIdPrefix: ca.lifescience.earshot
+  deploymentTarget:
+    iOS: "26.0"
+    watchOS: "26.0"
+  createIntermediateGroups: true
+
+packages:
+  EarshotKit:
+    path: EarshotKit
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""            # set locally; never committed
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+targets:
+
+  Earshot:
+    type: application
+    platform: iOS
+    sources:
+      - path: iOS/Earshot
+    dependencies:
+      - package: EarshotKit
+      - target: EarshotWatch
+        embed: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ca.lifescience.earshot
+        INFOPLIST_KEY_CFBundleDisplayName: Earshot
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        # Background audio is required so a capture survives the screen locking
+        # mid-meeting. Nothing else is requested.
+        INFOPLIST_KEY_UIBackgroundModes: audio
+        # Purpose strings are user-facing copy, not boilerplate — each one says
+        # what is done AND what is not (F-24).
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: >-
+          Earshot records your conversation so it can transcribe it on this iPhone.
+          The audio never leaves the device.
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: >-
+          Speech recognition runs entirely on this iPhone. Nothing is sent to Apple
+          or to us.
+        INFOPLIST_KEY_NSRemindersFullAccessUsageDescription: >-
+          Earshot puts the action items you accept into your Reminders, so they end
+          up somewhere you'll actually see them.
+        INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription: >-
+          Earshot reads your calendar to title conversations and suggest who was in
+          the room. Calendar data stays on this iPhone.
+    entitlements:
+      path: iOS/Earshot.entitlements
+      properties:
+        com.apple.developer.healthkit: false
+        com.apple.security.application-groups:
+          - group.ca.lifescience.earshot
+    info:
+      path: iOS/Info.plist
+      properties:
+        CFBundleURLTypes:
+          - CFBundleURLSchemes: [earshot]   # deep links from delivered Reminders
+        ITSAppUsesNonExemptEncryption: false
+
+  EarshotWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: Watch/EarshotWatch
+    dependencies:
+      - package: EarshotKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ca.lifescience.earshot.watchkitapp
+        INFOPLIST_KEY_CFBundleDisplayName: Earshot
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: ca.lifescience.earshot
+        INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
+        INFOPLIST_KEY_UIBackgroundModes: audio
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: >-
+          Earshot records from your wrist so you can capture a conversation without
+          taking your phone out. Audio syncs to your iPhone and stays there.
+
+  EarshotKitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: EarshotKit/Tests
+    dependencies:
+      - package: EarshotKit
